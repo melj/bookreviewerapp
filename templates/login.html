@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+This is the login page
+{% endblock %}
+
+{% block body %}
+
+<form id="login-form" action="/index" method="POST">
+	<label for="username"> Username: </label>
+	<input name="username" type="text" />
+	<label for="password"> Password: </label>
+	<input name="password" type="password" />
+	<button type="submit">Log in</button>	
+</form>
+
+
+{% endblock %}

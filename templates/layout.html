@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Club</title>
+</head>
+<body>
+	<header>
+		{% if session['username'] %}
+		<label type="text">Welcome, {{ session['username'] }}</label>
+		<a href="/logout">Logout</a>
+		{% else %}
+		<a href="/"> Login/Sign Up</a>
+		{% endif %}
+	</header>
+	<!-- Inserts the blocks "heading" and "body" into these spots -->
+	<h1>{% block heading %}{%  endblock %}</h1>
+	
+	{% block body%}
+	{% endblock %}
+
+	<footer>
+		
+
+	</footer>
+</body>
+</html>

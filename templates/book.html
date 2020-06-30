@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+{{ book.title }} by {{ book.author }} ({{ book.year }})
+<a href="/index">Back</a>
+{% endblock %}
+
+{% block body %}
+
+{% if reviews|length > 0 %}
+<h2>Reviews</h2>
+{% for review in reviews %}
+<li><b>{{review.rating}}</b> {{ review.content }}</li>
+{% endfor %}
+{% endif %}
+
+<h2>Leave a review:</h2>
+<form id="review-book-form" action="/book/{{book.isbn}}" method="POST">
+	<label for="rating-select">Rating:</label>
+	<select name="rating" id="rating-select">
+		<option value="5">Loved it! 5 Stars</option>
+		<option value="4">Liked it, 4 Stars</option>
+		<option value="3">It was okay, 3 Stars</option>
+		<option value="2">Boring, 2 Stars</option>
+		<option value="1">Horrible, 1 Star</option>
+	</select>
+	<label for="review-textarea">Review:</label>
+	<textarea name="review" id="review-textarea" placeholder="200 characters max" maxlength="200"></textarea>
+	<button type="submit">Post</button>
+</form>
+
+{% endblock %}

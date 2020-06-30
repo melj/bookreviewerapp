@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+The Great Book Reviewer
+{% endblock %}
+
+{% block body %}
+
+	<ul>
+ 	{% for book in books %}
+        <li><a href={{ "/book/" + book.isbn }} target="_blank">{{ book.title }} by {{ book.author }} ({{ book.year }})</a></li>
+    {% else %}
+    	<li>No books to display at the moment.</li>
+    {% endfor %}
+	</ul>
+
+{% endblock %}
