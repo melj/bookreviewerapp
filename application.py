@@ -54,12 +54,11 @@ def book(isbn):
 	if request.method == "POST":
 		if 'curr_user' not in session:
 			return render_template("error.html", message='Please Login or Sign up to review this book')			
-		else:
-			user = db.execute("SELECT * FROM users WHERE username=:name", {"name": session["curr_user"]}).fetchone()
+		else:			
 			content = request.form.get("review")
 			rating = request.form.get("rating")
 			db.execute("INSERT INTO reviews (rating, content, user_id, book_id) VALUES (:rating, :content, :user_id, :book_id)",
-                    {"rating": rating, "content": content, "user_id": user.username, "book_id": book.id})
+                    {"rating": rating, "content": content, "user_id": session['curr_user'], "book_id": book.id})
 			db.commit()
 
 	reviews = db.execute("SELECT * FROM reviews WHERE book_id = :book_id", {"book_id": book.id}).fetchall()
