@@ -1,17 +1,35 @@
 {% extends "layout.html" %}
 
 {% block heading %}
-The Great Book Reviewer
+
 {% endblock %}
 
 {% block body %}
-
-	<ul>
+	<form id="book-search-form" class="form-group form-inline" action="" method="">
+		<input type="text" placeholder="Search" aria-label="Search">
+		<button class="btn btn-success btn-rounded col-auto" type="submit">Search</button>
+	</form>
+	<div class="card-columns">
  	{% for book in books %}
-        <li><a href={{ "/book/" + book.isbn }} target="_blank">{{ book.title }} by {{ book.author }} ({{ book.year }})</a></li>
+        <div class="card bg-dark">
+        	<a class="book-card" href={{ "/book/" + book.isbn }}>
+        	  <img src="https://picsum.photos/300/250?blur=2&grayscale=true&random={{loop.index}}" height="250" width="300" class="card-img" alt="book cover">
+			  <div class="card-img-overlay">
+			   	<blockquote class="blockquote mb-0">
+			      <h5 class="card-title">{{ book.title }} ({{ book.year }})</h5>
+			      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+			      <footer class="blockquote-footer text-white">
+			        <small>
+			          <cite title="{{ book.author }}">by {{ book.author }}</cite>
+			        </small>
+			      </footer>
+			    </blockquote>
+			  </div>			   
+        	</a>
+        </div>
     {% else %}
     	<li>No books to display at the moment.</li>
     {% endfor %}
-	</ul>
+	</div>
 
 {% endblock %}

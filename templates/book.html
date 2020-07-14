@@ -2,31 +2,50 @@
 
 {% block heading %}
 {{ book.title }} by {{ book.author }} ({{ book.year }})
-<a href="/index">Back</a>
 {% endblock %}
 
 {% block body %}
+<div class="media">
+  <img src="https://picsum.photos/300/250?grayscale=true" height="300" width="250" alt="book cover" class="align-self-start mr-3">
+  <div class="media-body">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</div>
 
 {% if reviews|length > 0 %}
-<h2>Reviews</h2>
-{% for review in reviews %}
-<li><b>{{review.rating}}</b> {{ review.content }}</li>
-{% endfor %}
+<div id="reviews-container">
+	<h2>Reviews</h2>
+	<ul class="list-group">
+		{% for review in reviews %}
+		<li class="list-group-item">
+			{% for i in range(review.rating) %}
+				<img class="rating-star" src="{{ url_for('static', filename='star.png') }}" width="20" height="20" alt="star"/>
+			{% endfor %}
+			<p>{{ review.content }}</p>
+			<p>{{ review.user_id }}</p>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
 {% endif %}
 
 <h2>Leave a review:</h2>
 <form id="review-book-form" action="/book/{{book.isbn}}" method="POST">
-	<label for="rating-select">Rating:</label>
-	<select name="rating" id="rating-select">
-		<option value="5">Loved it! 5 Stars</option>
-		<option value="4">Liked it, 4 Stars</option>
-		<option value="3">It was okay, 3 Stars</option>
-		<option value="2">Boring, 2 Stars</option>
-		<option value="1">Horrible, 1 Star</option>
-	</select>
-	<label for="review-textarea">Review:</label>
-	<textarea name="review" id="review-textarea" placeholder="200 characters max" maxlength="200"></textarea>
-	<button type="submit">Post</button>
+	<div class="form-group">
+		<label for="rating-select">Rating:</label>
+		<select class="form-control" name="rating" id="rating-select">
+			<option value="5">Loved it! 5 Stars</option>
+			<option value="4">Liked it, 4 Stars</option>
+			<option value="3">It was okay, 3 Stars</option>
+			<option value="2">Boring, 2 Stars</option>
+			<option value="1">Horrible, 1 Star</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="review-textarea">Review:</label>
+		<textarea class="form-control" name="review" id="review-textarea" placeholder="200 characters max" maxlength="200" rows="4"></textarea>
+	</div>
+	<button class="btn btn-primary" type="submit">Post</button>
 </form>
 
 {% endblock %}

@@ -2,25 +2,76 @@
 <html>
 <head>
 	<title>Book Club</title>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customstyles.css') }}" >
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header>
-		{% if session['username'] %}
-		<label type="text">Welcome, {{ session['username'] }}</label>
-		<a href="/logout">Logout</a>
-		{% else %}
-		<a href="/"> Login/Sign Up</a>
-		{% endif %}
+		<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+			<!-- Nav Logo and Title -->
+		  <a class="navbar-brand" href="/index"> 
+		  	<img src="{{url_for('static', filename='logo.png')}}" width="100" height="70" alt="books">		    
+		    Book Reviewer
+		  </a>
+
+		  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+		  	<ul class="navbar-nav">
+		  		{% if user  %}
+		  			<span class="navbar-text">
+				    	Welcome, {{ user }}!
+				  	</span>
+			  		<li class="nav-item">
+			  			<a class="btn btn-danger my-2 my-sm-0 nav-link" href="/logout">Logout</a>
+			  		</li>
+			  	{% else %}
+			  		<!-- Login Form -->
+					<li class="nav-item">
+					    <a class="btn btn-success my-2 my-sm-0 nav-link" href="/">Login</a>
+					</li>
+			  		<li class="nav-item">
+			  			<a class="btn btn-primary my-2 my-sm-0 nav-link" href="/signup">Sign Up</a>
+			  		</li>
+			  	{% endif %}
+		  	</ul>
+		  </div>
+
+		  <!-- Toggle for above links when navbar is small -->
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		</nav>
 	</header>
+	
+	<div class="container main-body-container">
+	{% if error %}
+		<div class="alert alert-danger error-message" role="alert">
+		  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		  <span class="sr-only">Error:</span>
+		  {{ error }}
+		</div>
+	{% endif %}
 	<!-- Inserts the blocks "heading" and "body" into these spots -->
 	<h1>{% block heading %}{%  endblock %}</h1>
-	
 	{% block body%}
 	{% endblock %}
+	</div>
 
-	<footer>
-		
-
+	<footer class="navbar-dark bg-dark">
+		<p>Created by MelJ @2020</p>
+		<p><i>A simple Flask application to view and review books from <a href="goodreads.com" target="_blank">Goodreads.com</a></i></p>
+		<p>Star icon made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
 	</footer>
 </body>
-</html>
+</html

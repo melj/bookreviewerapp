@@ -2,3 +2,56 @@
 	font-weight: bold;
 	font-size: 30px;
 }
+
+.main-body-container {
+	width: 80%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 150px;
+}
+
+.book-card {
+	color: black;
+}
+
+.book-card:hover {
+	color: black;
+}
+
+#book-search-form {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#book-search-form input {
+	padding: 4px;
+    align-items: center;
+    vertical-align: bottom;
+    margin: 1px;
+    width: 80%;
+}
+
+footer {
+	position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+	color: white;
+	text-align: center;
+
+}
+
+.nav-item {
+	margin-left: 15px;
+}
+
+
+html {
+	position: relative;
+    min-height: 100%;
+}
+
+.error-message {
+	margin-top: 10px;
+}
