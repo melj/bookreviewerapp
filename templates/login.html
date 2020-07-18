@@ -1,12 +1,9 @@
 {% extends "layout.html" %}
 
-{% block heading %}
-This is the login page
-{% endblock %}
 
 {% block body %}
 
-<form id="login-form" action="/index" method="POST">
+<form id="login-form" action="/" method="POST">
 	<div class="form-group">
 		<label for="username"> Username </label>
 		<input class="form-control" name="username" type="text" />

@@ -14,22 +14,23 @@
 
 {% if reviews|length > 0 %}
 <div id="reviews-container">
-	<h2>Reviews</h2>
+	<h2 class="p-3 mb-2 bg-dark text-white">Reviews</h2>
 	<ul class="list-group">
 		{% for review in reviews %}
 		<li class="list-group-item">
 			{% for i in range(review.rating) %}
-				<img class="rating-star" src="{{ url_for('static', filename='star.png') }}" width="20" height="20" alt="star"/>
+				<img class="rating-star" src="{{ url_for('static', filename='star.png') }}" width="20" height="20" alt="star"/> 
 			{% endfor %}
-			<p>{{ review.content }}</p>
-			<p>{{ review.user_id }}</p>
+			<b> - {{ review.user_id }}</b>
+			<hr />
+			<p>{{ review.content }}</p>			
 		</li>
 		{% endfor %}
 	</ul>
 </div>
 {% endif %}
 
-<h2>Leave a review:</h2>
+<h2 class="p-3 mb-2 bg-dark text-white">Leave a Review</h2>
 <form id="review-book-form" action="/book/{{book.isbn}}" method="POST">
 	<div class="form-group">
 		<label for="rating-select">Rating:</label>
