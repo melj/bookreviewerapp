@@ -87,12 +87,12 @@ def index():
 	# Retrieve 10 books from the db
 	books = db.execute("SELECT * FROM books LIMIT 10").fetchall()
 
-	# if 'curr_user' not in session:
-	# 	user = None
-	# else:
-	# 	user = 
+	if 'curr_user' not in session:
+		user = None
+	else:
+		user = session['curr_user']
 
-	return render_template("index.html", books=books, user=session['curr_user'])
+	return render_template("index.html", books=books, user=user)
 
 # Get a specific book's details and reviews
 # User can also create a review here
@@ -100,11 +100,11 @@ def index():
 def book(isbn):
 	book = db.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn": isbn}).fetchone()
 	if book is None:
-		return render_template("error.html", message="No book was found for this ISBN code")
+		return render_template("book.html", error="No book was found for this ISBN code")
 
 	if request.method == "POST":
 		if 'curr_user' not in session:
-			return render_template("error.html", message='Please Login or Sign up to review this book')						
+			return render_template("login.html", error='Please Login or Sign up to review this book', user=None)
 
 		content = request.form.get("review")
 		rating = request.form.get("rating")
@@ -115,12 +115,12 @@ def book(isbn):
 	reviews = db.execute("SELECT * FROM reviews WHERE book_id = :book_id", {"book_id": book.id}).fetchall()
 	session['curr_book'] = book	
 
-	# if 'curr_user' not in session:
-	# 	user = None
-	# else:
-	# 	user = 
+	if 'curr_user' not in session:
+		user = None
+	else:
+		user = session['curr_user']
 
-	return render_template("book.html", book=book, reviews=reviews, user=session['curr_user'])
+	return render_template("book.html", book=book, reviews=reviews, user=user)
 
 # Sign the user out Route
 @app.route("/logout")
